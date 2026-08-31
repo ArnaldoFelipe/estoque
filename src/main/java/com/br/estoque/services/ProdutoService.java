@@ -4,6 +4,7 @@ import com.br.estoque.dto.AtualizarProdutoRequest;
 import com.br.estoque.dto.ProdutoRequest;
 import com.br.estoque.dto.ProdutoResponse;
 import com.br.estoque.entities.Produto;
+import com.br.estoque.exception.EstoqueinsuficienteException;
 import com.br.estoque.exception.ProdutoNaoEncontradoException;
 import com.br.estoque.mapper.ProdutoMapper;
 import com.br.estoque.repository.ProdutoRepository;
@@ -65,7 +66,7 @@ public class ProdutoService {
                 .orElseThrow(() -> new ProdutoNaoEncontradoException("Produto não foi encontrado no estoque"));
 
         if(produto.getQtEstoque() < quantidadeComprada){
-            throw new RuntimeException("Estoque insuficiente para o produto: " + produto.getNome());
+            throw new EstoqueinsuficienteException("Estoque insuficiente para o produto: " + produto.getNome());
         }
 
         produto.setQtEstoque(produto.getQtEstoque() - quantidadeComprada);

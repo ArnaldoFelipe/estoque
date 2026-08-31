@@ -21,4 +21,15 @@ public class GlobalExceptionHandler {
                         LocalDateTime.now()
                 ));
     }
+
+    @ExceptionHandler(EstoqueinsuficienteException.class)
+    public ResponseEntity<ErroResponse> handleEstoqueinsuficiente(EstoqueinsuficienteException ex){
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ErroResponse(
+                        ex.getMessage(),
+                        "ESTOQUE_INSUFICIENTE",
+                        LocalDateTime.now()
+                ));
+    }
 }
