@@ -48,7 +48,7 @@ public class ProdutoController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/{produtoId}/baixar-estoque")
+    @PutMapping("/{produtoId}/baixar-estoque")
     public ResponseEntity<Void> baixarEstoque(@PathVariable  UUID produtoId, @RequestParam Integer quantidade){
         produtoService.baixarEstoque(produtoId, quantidade);
         return ResponseEntity.noContent().build();
