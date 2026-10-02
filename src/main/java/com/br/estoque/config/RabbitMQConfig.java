@@ -16,20 +16,4 @@ public class RabbitMQConfig {
     public MessageConverter jsonMessageConverter(){
         return new JacksonJsonMessageConverter();
     }
-
-    @Bean
-    public Queue filaMorta() {
-        return new Queue("estoque.dlq", true);
-    }
-
-    @Bean
-    public DirectExchange deadLetterExchange() {
-        return new DirectExchange("estoque.dlx");
-    }
-
-    @Bean
-    public Binding bindingFilaMorta() {
-        // Liga a fila morta na exchange morta usando a routing key de erro
-        return BindingBuilder.bind(filaMorta()).to(deadLetterExchange()).with("estoque.baixar.dlq.rk");
-    }
 }
