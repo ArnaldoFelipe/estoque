@@ -9,7 +9,6 @@ import com.br.estoque.exception.ProdutoNaoEncontradoException;
 import com.br.estoque.mapper.ProdutoMapper;
 import com.br.estoque.repository.ProdutoRepository;
 import lombok.AllArgsConstructor;
-import org.hibernate.annotations.Temporal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,5 +69,6 @@ public class ProdutoService {
         }
 
         produto.setQtEstoque(produto.getQtEstoque() - quantidadeComprada);
+        produtoRepository.save(produto);
     }
 }
